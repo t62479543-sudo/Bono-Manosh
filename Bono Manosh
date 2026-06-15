@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Bono Manosh | Premium Clothing Gallery</title>
+    <!-- Google Fonts + Font Awesome for icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #faf7f2;
+            color: #1e1e2a;
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* brand header with Bono Manosh identity */
+        .brand {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .brand h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1f2b2c, #8b5a2b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            font-family: 'Inter', sans-serif;
+        }
+        .brand h1 i {
+            background: none;
+            color: #b57c48;
+            margin-right: 6px;
+        }
+        .brand p {
+            color: #5c5f73;
+            margin-top: 0.5rem;
+            font-weight: 400;
+            font-size: 1rem;
+            border-top: 1px solid #e9dfd5;
+            display: inline-block;
+            padding-top: 8px;
+        }
+        .upload-section {
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+            padding: 1.8rem;
+            margin-bottom: 2.5rem;
+            transition: all 0.2s ease;
+            border: 1px solid #f0eae2;
+        }
+        .form-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #2d2f3e;
+        }
+        .form-title i {
+            color: #b57c48;
+            font-size: 1.6rem;
+        }
+        .form-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            align-items: flex-end;
+        }
+        .input-group {
+            flex: 1;
+            min-width: 170px;
+        }
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #7a6a5c;
+            margin-bottom: 0.4rem;
+        }
+        .input-group input, .input-group .file-label {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border-radius: 24px;
+            border: 1.5px solid #e9e2da;
+            background: #fff;
+            font-family: 'Inter', sans-serif;
+            transition: 0.2s;
+            font-size: 0.95rem;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: #b57c48;
+            box-shadow: 0 0 0 3px rgba(181,124,72,0.2);
+        }
+        .file-label {
+            display: inline-block;
+            background: #f5f0eb;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 500;
+            color: #5e4b38;
+        }
+        .file-label i {
+            margin-right: 8px;
+        }
+        #imagePreview {
+            margin-top: 12px;
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 2px solid #efdbc9;
+            background: #fef5ed;
+            display: none;
+        }
+        .preview-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .btn-submit {
+            background: #2d2f3e;
+            border: none;
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 0.5rem;
+        }
+        .btn-submit:hover {
+            background: #b57c48;
+            transform: scale(1.02);
+            box-shadow: 0 8px 18px rgba(181,124,72,0.3);
+        }
+        .action-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            gap: 12px;
+        }
+        .counter {
+            background: #ede6de;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .clear-btn {
+            background: transparent;
+            border: 1.5px solid #ddd0c2;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #6a5a4c;
+        }
+        .clear-btn:hover {
+            background: #f3e9e2;
+            border-color: #b57c48;
+            color: #b57c48;
+        }
+        /* clothing grid */
+        .clothing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 2rem;
+        }
+        .cloth-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            border: 1px solid #efe2d8;
+            backdrop-filter: blur(2px);
+        }
+        .cloth-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.12);
+            border-color: #e1cfbf;
+        }
+        .card-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            background: #fcf7f2;
+            transition: transform 0.3s ease;
+        }
+        .card-info {
+            padding: 1.2rem 1rem 1.3rem 1rem;
+        }
+        .card-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+            color: #2b2b36;
+        }
+        .card-price {
+            font-weight: 600;
+            color: #b57c48;
+            margin: 0.4rem 0 0.8rem 0;
+            font-size: 1.1rem;
+        }
+        .delete-btn {
+            background: #fff1ea;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+            color: #b1552c;
+        }
+        .delete-btn:hover {
+            background: #ffe0d4;
+            color: #a23d16;
+        }
+        .empty-message {
+            text-align: center;
+            grid-column: 1 / -1;
+            background: #f5f0ea;
+            padding: 3rem;
+            border-radius: 60px;
+            color: #8f7b68;
+        }
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #ab9e8e;
+            border-top: 1px solid #e5dbd2;
+            padding-top: 1.8rem;
+        }
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #efe4db;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #7a5a44;
+            margin-top: 8px;
+        }
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem;
+            }
+            .form-grid {
+                flex-direction: column;
+            }
+            .btn-submit {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="brand">
+        <h1><i class="fas fa-crown"></i> Bono Manosh</h1>
+        <p>handcrafted elegance • timeless threads</p>
+        <div class="brand-badge"><i class="fas fa-camera"></i> your personal clothing gallery</div>
+    </div>
+
+    <!-- upload zone -->
+    <div class="upload-section">
+        <div class="form-title">
+            <i class="fas fa-camera-retro"></i>
+            <span>Add new piece — upload your clothes photo</span>
+        </div>
+        <div class="form-grid">
+            <div class="input-group">
+                <label><i class="fas fa-tag"></i> Title / Name</label>
+                <input type="text" id="clothesTitle" placeholder="e.g., Silk Kurta, Linen Shirt" autocomplete="off">
+            </div>
+            <div class="input-group">
+                <label><i class="fas fa-dollar-sign"></i> Price (optional)</label>
+                <input type="text" id="clothesPrice" placeholder="$59 / Contact">
+            </div>
+            <div class="input-group">
+                <label><i class="fas fa-image"></i> Clothes photo</label>
+                <input type="file" id="clothesImage" accept="image/jpeg,image/png,image/jpg,image/webp" style="display: none;">
+                <label for="clothesImage" class="file-label"><i class="fas fa-upload"></i> Choose your image</label>
+                <div class="preview-area">
+                    <img id="imagePreview" alt="preview">
+                    <span id="fileNamePreview" style="font-size: 0.75rem; color:#8b765e;"></span>
+                </div>
+            </div>
+            <div>
+                <button id="addClothBtn" class="btn-submit"><i class="fas fa-plus-circle"></i> Add to Bono Manosh</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- gallery header + actions -->
+    <div class="action-bar">
+        <div class="counter" id="itemsCounter">👕 0 items</div>
+        <button id="clearAllBtn" class="clear-btn"><i class="fas fa-trash-alt"></i> Clear all clothes</button>
+    </div>
+
+    <!-- dynamic clothing grid -->
+    <div id="clothingGrid" class="clothing-grid">
+        <!-- items injected here -->
+    </div>
+    <footer>
+        <i class="fas fa-tshirt"></i> Bono Manosh — Your wardrobe, your vision. Uploaded photos stay in your browser (local storage). <br> Curate, share, and style.
+    </footer>
+</div>
+
+<script>
+    // ---------- storage key ----------
+    const STORAGE_KEY = "bono_manosh_wardrobe";
+
+    // ---------- helper: gentle placeholder SVG with brand hint ----------
+    function getDemoClothSVG(accentColor = "#D9C5B0", textLabel = "Bono Manosh") {
+        const encoded = encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                <rect width="200" height="200" fill="#fcf4ed" rx="16" />
+                <path d="M70,60 L130,60 L135,80 L110,80 L100,65 L90,80 L65,80 Z" fill="${accentColor}" opacity="0.9"/>
+                <circle cx="100" cy="130" r="28" fill="none" stroke="#b6a088" stroke-width="2.5" stroke-dasharray="4 3"/>
+                <line x1="100" y1="102" x2="100" y2="118" stroke="#b6a088" stroke-width="2"/>
+                <line x1="85" y1="115" x2="93" y2="110" stroke="#b6a088" stroke-width="2"/>
+                <line x1="115" y1="115" x2="107" y2="110" stroke="#b6a088" stroke-width="2"/>
+                <text x="100" y="170" font-size="12" fill="#8f7862" text-anchor="middle" font-family="Inter">${textLabel}</text>
+                <text x="100" y="185" font-size="9" fill="#b99f86" text-anchor="middle">📸 upload yours</text>
+            </svg>
+        `);
+        return `data:image/svg+xml;charset=utf-8,${encoded}`;
+    }
+
+    // ---------- default demo items (elegant starter pieces for Bono Manosh) ----------
+    function getDefaultItems() {
+        return [
+            {
+                id: 2001,
+                title: "Handloom Cotton Kurta",
+                price: "$89.00",
+                imageData: getDemoClothSVG("#E2C7A8", "Bono Manosh")
+            },
+            {
+                id: 2002,
+                title: "Linen Blend Blazer",
+                price: "$149.00",
+                imageData: getDemoClothSVG("#C1CFC1", "Tailored Fit")
+            }
+        ];
+    }
+
+    // ---------- load items from localStorage ----------
+    function loadItems() {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (!stored) {
+            const defaultItems = getDefaultItems();
+            saveItems(defaultItems);
+            return defaultItems;
+        }
+        try {
+            const parsed = JSON.parse(stored);
+            if (Array.isArray(parsed)) {
+                const validated = parsed.filter(item => item && typeof item === 'object' && item.id);
+                if (validated.length === 0) {
+                    const defaultItems = getDefaultItems();
+                    saveItems(defaultItems);
+                    return defaultItems;
+                }
+                return validated;
+            } else {
+                const defaultItems = getDefaultItems();
+                saveItems(defaultItems);
+                return defaultItems;
+            }
+        } catch (e) {
+            const defaultItems = getDefaultItems();
+            saveItems(defaultItems);
+            return defaultItems;
+        }
+    }
+
+    function saveItems(items) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    }
+
+    // ---------- render gallery ----------
+    function renderGallery() {
+        const items = loadItems();
+        const gridContainer = document.getElementById("clothingGrid");
+        const counterSpan = document.getElementById("itemsCounter");
+        if (!gridContainer) return;
+
+        if (!items.length) {
+            gridContainer.innerHTML = `<div class="empty-message"><i class="fas fa-hanger fa-2x" style="margin-bottom: 12px; display: block;"></i> Your Bono Manosh wardrobe is empty — upload your first clothes photo above ✨</div>`;
+            if (counterSpan) counterSpan.innerHTML = `👗 0 items`;
+            return;
+        }
+
+        counterSpan.innerHTML = `👚 ${items.length} ${items.length === 1 ? 'piece' : 'pieces'}`;
+
+        let html = '';
+        for (let item of items) {
+            const displayPrice = item.price && item.price.trim() !== "" ? item.price : "— inquire —";
+            html += `
+                <div class="cloth-card" data-id="${item.id}">
+                    <img class="card-img" src="${item.imageData}" alt="${escapeHtml(item.title)}" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=Bono+Manosh'">
+                    <div class="card-info">
+                        <div class="card-title">${escapeHtml(item.title)}</div>
+                        <div class="card-price">${escapeHtml(displayPrice)}</div>
+                        <button class="delete-btn" data-id="${item.id}"><i class="fas fa-trash-can"></i> Remove</button>
+                    </div>
+                </div>
+            `;
+        }
+        gridContainer.innerHTML = html;
+
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = parseInt(btn.getAttribute('data-id'));
+                if (id && !isNaN(id)) {
+                    deleteItemById(id);
+                }
+            });
+        });
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    function deleteItemById(id) {
+        let items = loadItems();
+        const filtered = items.filter(item => item.id !== id);
+        if (filtered.length === items.length) return;
+        saveItems(filtered);
+        renderGallery();
+    }
+
+    function clearAllItems() {
+        if (confirm("⚠️ Remove ALL clothes from Bono Manosh gallery? This action is permanent.")) {
+            saveItems([]);
+            renderGallery();
+            resetUploadForm();
+        }
+    }
+
+    function resetUploadForm() {
+        document.getElementById("clothesTitle").value = "";
+        document.getElementById("clothesPrice").value = "";
+        const fileInput = document.getElementById("clothesImage");
+        fileInput.value = "";
+        const previewImg = document.getElementById("imagePreview");
+        previewImg.style.display = "none";
+        previewImg.src = "";
+        document.getElementById("fileNamePreview").innerText = "";
+    }
+
+    function addClothingItemFromForm() {
+        const titleInput = document.getElementById("clothesTitle");
+        const priceInput = document.getElementById("clothesPrice");
+        const fileInput = document.getElementById("clothesImage");
+
+        let title = titleInput.value.trim();
+        if (!title) {
+            alert("✨ Please add a title for your clothing piece (e.g., 'Embroidered Jacket')");
+            return;
+        }
+
+        const file = fileInput.files[0];
+        if (!file) {
+            alert("📸 Please select a clothes photo from your device (JPG, PNG, WEBP)");
+            return;
+        }
+
+        if (!file.type.startsWith('image/')) {
+            alert("File must be an image (your clothes photo)");
+            return;
+        }
+
+        const maxSize = 5 * 1024 * 1024;
+        if (file.size > maxSize) {
+            alert("Image is too large (max 5MB). Please compress or choose a smaller photo.");
+            return;
+        }
+
+        let price = priceInput.value.trim();
+        if (price === "") {
+            price = "Price on request";
+        } else if (!price.startsWith("$") && !price.toLowerCase().includes("usd")) {
+            if (!isNaN(parseFloat(price))) {
+                price = `$${price}`;
+            }
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+            const imageDataUrl = evt.target.result;
+            const newItem = {
+                id: Date.now(),
+                title: title,
+                price: price,
+                imageData: imageDataUrl
+            };
+            const currentItems = loadItems();
+            const updatedItems = [newItem, ...currentItems];
+            saveItems(updatedItems);
+            renderGallery();
+            resetUploadForm();
+
+            const successMsg = document.createElement("div");
+            successMsg.textContent = "✓ " + title + " added to Bono Manosh collection!";
+            successMsg.style.position = "fixed";
+            successMsg.style.bottom = "20px";
+            successMsg.style.right = "20px";
+            successMsg.style.backgroundColor = "#2d2f3e";
+            successMsg.style.color = "white";
+            successMsg.style.padding = "10px 20px";
+            successMsg.style.borderRadius = "60px";
+            successMsg.style.fontSize = "0.85rem";
+            successMsg.style.zIndex = "999";
+            successMsg.style.opacity = "0.9";
+            document.body.appendChild(successMsg);
+            setTimeout(() => successMsg.remove(), 2100);
+        };
+        reader.onerror = function() {
+            alert("Error reading image file. Please try another photo.");
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function setupImagePreview() {
+        const fileInput = document.getElementById("clothesImage");
+        const previewImg = document.getElementById("imagePreview");
+        const fileNameSpan = document.getElementById("fileNamePreview");
+
+        fileInput.addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    previewImg.style.display = "block";
+                    fileNameSpan.innerText = file.name.length > 30 ? file.name.slice(0,27)+"..." : file.name;
+                };
+                reader.readAsDataURL(file);
+            } else if (file) {
+                alert("Please select a valid image file for your clothes photo.");
+                fileInput.value = "";
+                previewImg.style.display = "none";
+                fileNameSpan.innerText = "";
+            } else {
+                previewImg.style.display = "none";
+                previewImg.src = "";
+                fileNameSpan.innerText = "";
+            }
+        });
+    }
+
+    function init() {
+        renderGallery();
+
+        const addBtn = document.getElementById("addClothBtn");
+        if (addBtn) addBtn.addEventListener("click", addClothingItemFromForm);
+
+        const clearBtn = document.getElementById("clearAllBtn");
+        if (clearBtn) clearBtn.addEventListener("click", clearAllItems);
+
+        const titleField = document.getElementById("clothesTitle");
+        if (titleField) {
+            titleField.addEventListener("keypress", function(e) {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    addClothingItemFromForm();
+                }
+            });
+        }
+
+        setupImagePreview();
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+</script>
+</body>
+</html>
